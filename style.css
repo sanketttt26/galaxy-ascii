@@ -1,0 +1,64 @@
+/* trimmed from ascii/horizon's styles.css by Siddharth Meena (MIT), https://github.com/SiddDevZ/horizon */
+:root {
+  color-scheme: dark;
+  --bg: #12110e; --ink: #f2f1ec; --grey: #9a9890; --faint: rgba(242, 241, 236, .16); --pink: #ff2b8f;
+  --mono: "Martian Mono", ui-monospace, Menlo, monospace;
+}
+:root[data-theme="paper"] {
+  color-scheme: light;
+  --bg: #f7f7f4; --ink: #15140f; --grey: #64635e; --faint: rgba(21, 20, 15, .14); --pink: #f81a86;
+}
+:root[data-theme="pink"] {
+  color-scheme: light;
+  --bg: #f81a86; --ink: #15140f; --grey: #4a0b2a; --faint: rgba(21, 20, 15, .2); --pink: #f7f7f4;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0; overflow: hidden;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--mono); font-size: 12px; line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; padding: 0; }
+a { color: inherit; text-underline-offset: 3px; text-decoration-color: var(--faint); }
+a:hover { text-decoration-color: currentColor; }
+
+.stage { position: fixed; inset: 0; background: var(--bg); touch-action: none; user-select: none; -webkit-user-select: none; }
+.stage canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+.stage.dragging canvas { cursor: grabbing; }
+body.rec .stage canvas { cursor: none; }
+.fallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--grey); }
+
+.chrome { transition: opacity .2s ease; }
+body.rec .chrome { opacity: 0; pointer-events: none; }
+.top { position: fixed; z-index: 3; top: 0; left: 0; right: 0; height: 56px; padding: 0 16px 0 24px; display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
+.top > * { pointer-events: auto; }
+.mark { font-weight: 500; letter-spacing: -.01em; }
+.mark b { color: var(--pink); font-weight: 500; padding: 0 2px; }
+.tools { display: flex; gap: 2px; }
+.tools button { height: 32px; padding: 0 10px; border-radius: 8px; color: var(--grey); font-size: 11px; transition: background-color .15s ease, color .15s ease; }
+.tools button:hover { background: var(--faint); color: var(--ink); }
+.tools button[aria-pressed="true"] { color: var(--ink); }
+.tools button:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.foot { position: fixed; z-index: 2; left: 24px; right: 24px; bottom: 18px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; pointer-events: none; }
+.foot a { pointer-events: auto; }
+.spec { margin: 0; font-size: 13px; white-space: pre; font-variant-numeric: tabular-nums; }
+.spec .n { color: var(--grey); }
+.meta { display: flex; align-items: center; gap: 20px; color: var(--grey); font-size: 11px; }
+.hint { transition: opacity .6s ease; }
+.hint.gone { opacity: 0; }
+
+.toast { position: fixed; z-index: 6; left: 50%; bottom: 64px; transform: translate(-50%, 6px); padding: 8px 12px; border-radius: 8px; background: var(--ink); color: var(--bg); font-size: 11px; opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .3s ease; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 640px) {
+  .top { padding: 0 8px 0 16px; }
+  .foot { left: 16px; right: 16px; bottom: max(16px, env(safe-area-inset-bottom)); flex-direction: column; align-items: flex-start; gap: 8px; }
+  .meta { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .toast { bottom: 110px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .toast { transition: opacity .2s ease; }
+}
