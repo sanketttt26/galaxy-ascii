@@ -1,0 +1,12 @@
+{
+  "name": "ascii-milky-way",
+  "version": "1.0.0",
+  "description": "The Milky Way, ray-marched live and typed in ASCII. Built on ascii/horizon by Siddharth Meena.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes serve -l 4173 .",
+    "test": "node --test"
+  },
+  "license": "MIT"
+}
